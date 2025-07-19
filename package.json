@@ -1,0 +1,40 @@
+{
+  "name": "tired-stack",
+  "version": "1.0.0",
+  "module": "src/main.tsx",
+  "scripts": {
+    "check": "xss-scan",
+    "dev": "concurrently --kill-others-on-fail --kill-others 'bun run watch:assets' 'bun run watch:server'",
+    "build": "bun run build:assets && bun run build:server",
+    "watch:assets": "bun run build.config.ts --watch",
+    "watch:server": "bun run --hot src/main.tsx",
+    "build:assets": "bun run build.config.ts --minify",
+    "build:server": "bun build --compile src/main.tsx --outfile server",
+    "prettier:write": "prettier . --write"
+  },
+  "dependencies": {
+    "@iconify/json": "^2.2.358",
+    "@iconify/tailwind4": "^1.0.6",
+    "@kitajs/html": "^4.2.9",
+    "@kitajs/ts-html-plugin": "^4.1.1",
+    "@tailwindcss/postcss": "^4.1.11",
+    "bun-types": "latest",
+    "concurrently": "^9.2.0",
+    "daisyui": "^5.0.46",
+    "htmx.org": "^2.0.6",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "postcss-import": "^16.1.1",
+    "postcss-load-config": "^6.0.1",
+    "postcss-minify": "^1.2.0",
+    "prettier": "3.6.2",
+    "resize-observer-polyfill": "^1.5.1",
+    "simplebar": "^6.3.2",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {},
+  "trustedDependencies": [
+    "@tailwindcss/oxide"
+  ]
+}
