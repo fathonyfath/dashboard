@@ -1,52 +1,27 @@
 import { file, serve } from "bun";
 import { router } from "@server/routes";
 import { jsx } from "@server/jsx";
-import { htmx } from "@server/htmx";
-import Layout from "./Layout";
 import Skeleton from "./Skeleton";
-import SimpeBarExample from "./SimpeBarExample";
-import HtmxTest from "./HtmxTest";
-
-const htmxDecoration = htmx();
+import Layout from "./Layout";
 
 const server = serve({
   routes: router({
     "/:fileName": (p) =>
-      p.handle((c) => {
-        return new Response(file(`public/${c.request.params.fileName}`));
+      p.handle(async (c) => {
+        const targetFile = file(`public/${c.request.params.fileName}`);
+        if (await targetFile.exists()) {
+          return new Response(targetFile);
+        }
+        return new Response(null, { status: 404 });
       }),
     "/": (p) =>
       p.handle(
         jsx(() => (
-          <Layout name="Hello" js css>
+          <Layout name="Test">
             <Skeleton />
           </Layout>
         )),
       ),
-    "/simplebar": (p) =>
-      p.handle(
-        jsx(() => (
-          <Layout name="SimpleBar Example" js css>
-            <SimpeBarExample />
-          </Layout>
-        )),
-      ),
-    "/htmx-test": (p) =>
-      p.handle(
-        jsx(() => (
-          <Layout name="HTMX" js>
-            <HtmxTest />
-          </Layout>
-        )),
-      ),
-    "/htmx": (p) =>
-      p.decorate(htmxDecoration).handle((context) => {
-        const response = new Response(JSON.stringify(context.htmx, null, 4));
-        if (context.htmx.isHTMX()) {
-          context.htmx.reswap(response, "innerHTML");
-        }
-        return response;
-      }),
   }),
 });
 

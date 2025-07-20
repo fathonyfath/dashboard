@@ -8,7 +8,6 @@
 ├── .sidebar-overlay
 └── .sidebar-content
   */
-
 .sidebar {
   @apply flex;
 }
@@ -32,7 +31,10 @@
     }
     &:checked {
       & ~ .sidebar-overlay {
-        @apply fixed cursor-pointer opacity-100;
+        @apply cursor-pointer visible opacity-100;
+        transition:
+          visibility 0s 0s,
+          opacity var(--default-transition-duration) var(--ease-in-out);
       }
     }
   }
@@ -52,7 +54,10 @@
 
 .sidebar-overlay {
   @variant max-lg {
-    @apply z-[499] inset-0 opacity-0 transition-opacity ease-in-out duration-150;
+    @apply z-[499] inset-0 fixed invisible opacity-0;
+    transition:
+      visibility 0s var(--default-transition-duration),
+      opacity var(--default-transition-duration) var(--ease-in-out);
     background-color: oklch(0% 0 0 / 40%);
   }
 }

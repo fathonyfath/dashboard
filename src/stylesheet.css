@@ -1,5 +1,9 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes:
+    light --default,
+    bumblebee;
+}
 @plugin "@iconify/tailwind4";
 
 @import "simplebar/dist/simplebar.min.css";
