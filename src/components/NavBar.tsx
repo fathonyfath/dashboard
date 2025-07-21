@@ -4,7 +4,7 @@ type Props = { hamburgerForId: string };
 
 export default function (props: PropsWithChildren<Props>): JSX.Element {
   return (
-    <div class="navbar bg-base-100 border-b border-base-300">
+    <div class="navbar bg-base-100 border-b border-base-300 sticky top-0">
       <div class="flex-none">
         <label
           class="btn btn-square btn-ghost sidebar-button"

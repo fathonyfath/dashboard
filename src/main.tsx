@@ -1,27 +1,19 @@
 import { file, serve } from "bun";
 import { router } from "@server/routes";
-import { jsx } from "@server/jsx";
-import Skeleton from "./Skeleton";
-import Layout from "./Layout";
+import sidebarRoutes from "./sidebarRoutes";
 
 const server = serve({
   routes: router({
-    "/:fileName": (p) =>
+    "/*": (p) =>
       p.handle(async (c) => {
-        const targetFile = file(`public/${c.request.params.fileName}`);
+        const pathName = new URL(c.request.url).pathname;
+        const targetFile = file(`public/${pathName}`);
         if (await targetFile.exists()) {
           return new Response(targetFile);
         }
         return new Response(null, { status: 404 });
       }),
-    "/": (p) =>
-      p.handle(
-        jsx(() => (
-          <Layout name="Test">
-            <Skeleton />
-          </Layout>
-        )),
-      ),
+    ...sidebarRoutes(),
   }),
 });
 

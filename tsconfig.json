@@ -10,7 +10,8 @@
     "paths": {
       "@/*": ["src/*"],
       "@server/*": ["src/server/*"],
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@fragments/*": ["src/fragments/*"]
     },
     "types": ["bun-types"],
     "esModuleInterop": true,

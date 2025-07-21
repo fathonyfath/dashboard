@@ -2,10 +2,17 @@
 @plugin "daisyui" {
   themes:
     light --default,
-    bumblebee;
+    cupcake;
 }
 @plugin "@iconify/tailwind4";
 
 @import "simplebar/dist/simplebar.min.css";
 
 @import "./components/styles/sidebar.css";
+
+:root {
+  --breakpoint-sm: theme(screens.sm);
+  --breakpoint-md: theme(screens.md);
+  --breakpoint-lg: theme(screens.lg);
+  --breakpoint-xl: theme(screens.xl);
+}
