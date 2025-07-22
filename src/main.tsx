@@ -4,15 +4,17 @@ import sidebarRoutes from "./sidebarRoutes";
 
 const server = serve({
   routes: router({
-    "/*": (p) =>
-      p.handle(async (c) => {
-        const pathName = new URL(c.request.url).pathname;
-        const targetFile = file(`public/${pathName}`);
-        if (await targetFile.exists()) {
-          return new Response(targetFile);
-        }
-        return new Response(null, { status: 404 });
-      }),
+    "/*": {
+      GET: (p) =>
+        p.handle(async (c) => {
+          const pathName = new URL(c.request.url).pathname;
+          const targetFile = file(`public/${pathName}`);
+          if (await targetFile.exists()) {
+            return new Response(targetFile);
+          }
+          return new Response(null, { status: 404 });
+        }),
+    },
     ...sidebarRoutes(),
   }),
 });
