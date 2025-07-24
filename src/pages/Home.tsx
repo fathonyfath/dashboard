@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
 import Page from "@/components/Page";
 import Menu from "@/fragments/Menu";
-import { PropsWithChildren } from "@kitajs/html";
+import type { PropsWithChildren } from "@kitajs/html";
 
 export default function (
   props: PropsWithChildren<{ isHTMX: boolean }>,

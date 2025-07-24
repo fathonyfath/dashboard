@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "@kitajs/html";
+import type { PropsWithChildren } from "@kitajs/html";
 import Menu from "@components/Menu";
 
 type MenuId = "home" | "ingredients" | "products";

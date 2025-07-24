@@ -1,5 +1,5 @@
 import NavBar from "@components/NavBar";
-import { h, PropsWithChildren } from "@kitajs/html";
+import type { PropsWithChildren } from "@kitajs/html";
 
 function SideBar(props: PropsWithChildren): JSX.Element {
   return (
@@ -30,9 +30,7 @@ export default function (props: PropsWithChildren<Props>): JSX.Element {
   const hasSideBar = safeSideBar !== undefined && safeSideBar !== null;
 
   return (
-    <div
-      class="sidebar"
-    >
+    <div class="sidebar">
       {hasSideBar && (
         <input id="sidebar" type="checkbox" class="sidebar-toggle" />
       )}
