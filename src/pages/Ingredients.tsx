@@ -1,12 +1,12 @@
-import Layout from "@/components/Layout";
-import Page from "@/components/Page";
-import Menu from "@/fragments/Menu";
+import Layout from "@components/Layout";
+import Page from "@components/Page";
+import Navigation from "@fragments/Navigation";
 import type { PropsWithChildren } from "@kitajs/html";
 
 export default function (
   props: PropsWithChildren<{ isHTMX: boolean }>,
 ): JSX.Element {
-  const menu = <Menu selectedMenuId="ingredients" />;
+  const menu = <Navigation selected="ingredients" />;
   const content = Array(20)
     .fill(0)
     .map(() => (
@@ -20,7 +20,7 @@ export default function (
     return (
       <>
         {content}
-        <div hx-swap-oob="innerHTML:#sidebar-menu">{menu}</div>
+        <Page.SideBarPart>{menu}</Page.SideBarPart>
       </>
     );
   } else {

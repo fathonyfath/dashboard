@@ -1,8 +1,9 @@
 import type { PropsWithChildren } from "@kitajs/html";
 
-type Props = { title: string; js?: JSX.Element };
+type Props = { title: string; js?: JSX.Element; css?: JSX.Element };
 
 export default function (props: PropsWithChildren<Props>): JSX.Element {
+  const safeCss = props.css;
   const safeJs = props.js;
 
   return (
@@ -14,6 +15,7 @@ export default function (props: PropsWithChildren<Props>): JSX.Element {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <title safe>{props.title}</title>
           <link rel="stylesheet" href="stylesheet.css" />
+          {safeCss}
         </head>
         <body>
           {props.children}

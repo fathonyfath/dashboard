@@ -1,7 +1,7 @@
 import { config } from "@server/routes";
 import { jsx } from "@server/jsx";
 import { htmx } from "@server/htmx";
-import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
 import Ingredients from "./pages/Ingredients";
 import Products from "./pages/Products";
 
@@ -9,11 +9,11 @@ const htmxDecorator = htmx();
 
 export default function () {
   return config({
-    "/": Response.redirect("/home", 307),
-    "/home": (p) =>
+    "/": Response.redirect("/dashboard", 307),
+    "/dashboard": (p) =>
       p
         .decorate(htmxDecorator)
-        .handle(jsx((c) => <Home isHTMX={c.htmx.isHTMX()} />)),
+        .handle(jsx((c) => <Dashboard isHTMX={c.htmx.isHTMX()} />)),
 
     "/ingredients": (p) =>
       p

@@ -12,11 +12,15 @@ function SideBar(props: PropsWithChildren): JSX.Element {
   );
 }
 
+function SideBarPart(props: PropsWithChildren): JSX.Element {
+  return <div hx-swap-oob="innerHTML:#sidebar-menu">{props.children}</div>;
+}
+
 function Content(props: PropsWithChildren): JSX.Element {
   return (
     <div class="sidebar-content bg-base-200" id="page-root">
       <NavBar hamburgerForId="sidebar" />
-      <div class="grow" id="page-content">
+      <div class="grow p-6" id="page-content">
         {props.children}
       </div>
     </div>
@@ -25,7 +29,7 @@ function Content(props: PropsWithChildren): JSX.Element {
 
 type Props = { sidebar?: JSX.Element };
 
-export default function (props: PropsWithChildren<Props>): JSX.Element {
+function Page(props: PropsWithChildren<Props>): JSX.Element {
   const safeSideBar = props.sidebar;
   const hasSideBar = safeSideBar !== undefined && safeSideBar !== null;
 
@@ -46,3 +50,7 @@ export default function (props: PropsWithChildren<Props>): JSX.Element {
     </div>
   );
 }
+
+Page.SideBarPart = SideBarPart;
+
+export default Page;
