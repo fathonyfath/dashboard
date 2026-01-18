@@ -1,5 +1,5 @@
 import { file, serve } from "bun";
-import { jsx } from "@server";
+import { htmx, jsx, withMiddleware } from "@server";
 import Dashboard from "./pages/Dashboard";
 import Ingredients from "./pages/Ingredients";
 import Products from "./pages/Products";
@@ -17,9 +17,18 @@ const server = serve({
       },
     },
     "/": Response.redirect("/dashboard", 307),
-    "/dashboard": jsx(() => <Dashboard isHTMX={false} />),
-    "/ingredients": jsx(() => <Ingredients isHTMX={false} />),
-    "/products": jsx(() => <Products isHTMX={false} />),
+    "/dashboard": withMiddleware(
+      [htmx],
+      jsx((req, ser, ctx) => <Dashboard isHTMX={ctx.htmx.isHTMX()} />),
+    ),
+    "/ingredients": withMiddleware(
+      [htmx],
+      jsx((req, ser, ctx) => <Ingredients isHTMX={ctx.htmx.isHTMX()} />),
+    ),
+    "/products": withMiddleware(
+      [htmx],
+      jsx((req, ser, ctx) => <Products isHTMX={ctx.htmx.isHTMX()} />),
+    ),
   },
 });
 
