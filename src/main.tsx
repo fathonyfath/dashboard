@@ -1,22 +1,26 @@
 import { file, serve } from "bun";
-import { router } from "@server/routes";
-import sidebarRoutes from "./sidebarRoutes";
+import { jsx } from "@server";
+import Dashboard from "./pages/Dashboard";
+import Ingredients from "./pages/Ingredients";
+import Products from "./pages/Products";
 
 const server = serve({
-  routes: router({
+  routes: {
     "/*": {
-      GET: (p) =>
-        p.handle(async (c) => {
-          const pathName = new URL(c.request.url).pathname;
-          const targetFile = file(`public/${pathName}`);
-          if (await targetFile.exists()) {
-            return new Response(targetFile);
-          }
-          return new Response(null, { status: 404 });
-        }),
+      GET: async (req) => {
+        const pathName = new URL(req.url).pathname;
+        const targetFile = file(`public/${pathName}`);
+        if (await targetFile.exists()) {
+          return new Response(targetFile);
+        }
+        return new Response(null, { status: 404 });
+      },
     },
-    ...sidebarRoutes(),
-  }),
+    "/": Response.redirect("/dashboard", 307),
+    "/dashboard": jsx(() => <Dashboard isHTMX={false} />),
+    "/ingredients": jsx(() => <Ingredients isHTMX={false} />),
+    "/products": jsx(() => <Products isHTMX={false} />),
+  },
 });
 
 const cleanup = async () => {
