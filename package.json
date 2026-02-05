@@ -1,15 +1,15 @@
 {
   "name": "tired-stack",
   "version": "1.0.0",
-  "module": "src/main.tsx",
+  "module": "src/index.tsx",
   "scripts": {
     "check": "xss-scan",
-    "dev": "concurrently --kill-others-on-fail --kill-others 'bun run watch:assets' 'bun run watch:server'",
-    "build": "bun run build:assets && bun run build:server",
-    "watch:assets": "bun run build.config.ts --watch",
-    "watch:server": "bun run --hot src/main.tsx",
-    "build:assets": "bun run build.config.ts --minify",
-    "build:server": "bun build --compile src/main.tsx --outfile server",
+    "dev": "concurrently --kill-others-on-fail --kill-others 'bun run assets:watch' 'bun run server:watch'",
+    "build": "bun run assets:build && bun run server:build",
+    "assets:watch": "bun run build.config.ts --watch",
+    "server:watch": "bun run --hot src/index.tsx",
+    "assets:build": "bun run build.config.ts --minify",
+    "server:build": "bun build --compile src/index.tsx --outfile server",
     "prettier:write": "prettier . --write"
   },
   "dependencies": {

@@ -53,3 +53,7 @@ public/**/*.js.map
 
 # binary file
 /server
+/server.exe
+*.db
+*.sqlite
+*.sqlite3
