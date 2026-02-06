@@ -52,8 +52,17 @@ public/**/*.js
 public/**/*.js.map
 
 # binary file
-/server
-/server.exe
+/app
+/app.exe
 *.db
 *.sqlite
 *.sqlite3
+
+*.db
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+
+# Generated folder
+/generated
