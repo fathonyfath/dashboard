@@ -1,8 +1,9 @@
 import { file } from "bun";
 import { htmx, jsx, withMiddleware } from "@/server";
-import Page from "@/components/Page";
 import { rootLogger } from "@/logger";
-import type { Database } from "bun:sqlite";
+import { dashboard } from "@/views/dashboard";
+import { ingredients } from "@/views/ingredients";
+import { products } from "@/views/products";
 
 const serverLogger = rootLogger.withTag("server");
 
@@ -22,28 +23,15 @@ export function serve(port: number) {
       "/": Response.redirect("/dashboard", 307),
       "/dashboard": withMiddleware(
         [htmx],
-        jsx((req, ser, ctx) => (
-          <Page name="Dashboard">
-            <Page.Header />
-            <Page.Content />
-          </Page>
-        )),
+        jsx(() => dashboard()),
       ),
       "/ingredients": withMiddleware(
         [htmx],
-        jsx((req, ser, ctx) => (
-          <Page name="Ingredients">
-            <h1>Ingredients</h1>
-          </Page>
-        )),
+        jsx(() => ingredients()),
       ),
       "/products": withMiddleware(
         [htmx],
-        jsx((req, ser, ctx) => (
-          <Page name="Products">
-            <h1>Products</h1>
-          </Page>
-        )),
+        jsx(() => products()),
       ),
     },
     port,
