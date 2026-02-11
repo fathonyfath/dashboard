@@ -6,7 +6,7 @@ export default function (props: PropsWithChildren<Props>): JSX.Element {
   return (
     <>
       {`<!DOCTYPE html>`}
-      <html lang="en" data-theme="theme-autumn">
+      <html lang="en" data-theme="theme-harvest">
         <head>
           <meta charset="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
